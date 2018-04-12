@@ -4,23 +4,23 @@ import {
     Text, 
     StyleSheet, 
     BackHandler, 
-    TextField, 
     TouchableHighlight,
     Alert,
 } from 'react-native';
 
+import { TextField } from 'react-native-material-textfield';
 
-export default class SignupArtist extends Component {
+ class SignupArtist extends Component {
 
 	state = {
-		name = '',
-		email = '',
-		password = '',
-		confirmPassword = '',
-		gender = '',
-		videoLink = '',
+		name : '',
+		email : '',
+		password : '',
+		confirmPassword : '',
+		gender : '',
+		videoLink : '',
 
-	}
+	};
 
 
 	signupSubmit(){
@@ -35,24 +35,25 @@ export default class SignupArtist extends Component {
 	}
 	render() {
 		return (
-			// const {name, email, password, confirmPassword, gender, videoLink} = this.state
 			<View style={styles.container}>
 				
 				<TextField 
-					placeHolder = "Name"
+					label='Name'
 					required
 					value={this.state.name}
 					onChangeText = {(name) => this.setState({name}) }
 				
 				/>
-				<TextField placeHolder = "email"
+				<TextField 
+					label='Email'
 					required
 					value={this.state.email}
-					 keyboardType = "email-address"
+					 keyboardType = 'email-address'
 					onChangeText = {(email) => this.setState({email}) } 
 				/>
 
-				<TextField placeHolder = "password"
+				<TextField 
+					label='Password'
 					required
 					value={this.state.password}
 					secureTextEntry
@@ -60,7 +61,8 @@ export default class SignupArtist extends Component {
 					onChangeText = {(password) => this.setState({password}) } 
 				/>
 
-				<TextField placeHolder = " Confirm password"
+				<TextField 
+					label='Confirm Password'
 					required
 					value={this.state.confirmPassword}
 					secureTextEntry
@@ -68,18 +70,24 @@ export default class SignupArtist extends Component {
 					onChangeText = {(confirmPassword) => this.setState({confirmPassword}) } 
 				/>
 
-				<TextField placeHolder = "Gender"
+				<TextField 
+					label='Gender'
 					required
 					value={this.state.gender}
 					onChangeText = {(gender) => this.setState({gender}) } 
 				/>
-				<TextField placeHolder = "Video Link"
+				<TextField 
+					textColor='#fff'
+                    tintColor='#fff'
+                    baseColor='#DEDEDE'
+					label='Video Link'
 					required
 					value={this.state.videoLink}
 					onChangeText = {(videoLink) => this.setState({videoLink}) } 
 				/>
 
-				<TouchableHighlight onPress={() => this.signupSubmit()}>
+
+				<TouchableHighlight onPress={() => this.signupSubmit()} >
 					<Text> SignUp </Text>
 				</TouchableHighlight>
 
@@ -90,10 +98,11 @@ export default class SignupArtist extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-	    backgroundColor: '#fff',
-	    alignItems: 'center',
-	    justifyContent: 'center',
-	}
+        flex: 1,
+        backgroundColor: '#fff',
+        marginLeft: 25,
+        marginRight: 25
+    },
 });
 
+export default SignupArtist;
