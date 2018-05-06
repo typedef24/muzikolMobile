@@ -22,15 +22,3 @@ export class Posts extends Component {
 		});
 	}
 }
-
-
-async fetchCategoryCompanies(category){
-		try{
-			const response = await fetch(apiHost +'/company/category?searchTerm='+category);
-			const responseJson = await response.json();
-			return responseJson;
-		}
-		catch(error){
-			console.error(error);
-		}
-	},
