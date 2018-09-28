@@ -12,11 +12,11 @@ import Splash from '../views/Splash';
 //logic here is to display splash if there is nothing on the state 
 //hence when the api call has fetched something then display that thing
 
-
+//still working on this home screen
 class Home extends Component {
 
 		state = {
-			content: false,
+			content: true,
 		}
 		//Todo
 		//only show splash screen when making a request to the api

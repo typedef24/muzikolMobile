@@ -8,6 +8,7 @@ BackHandler
 
 import OnboardingView from './src/components/OnboardingView';
 import Home from './src/components/authViews/Home';
+import Settings from './src/components/authViews/Settings';
 import Login from './src/components/views/Login';
 import SignupArtist from './src/components/views/SignupArtist';
 import ForgetPassword from './src/components/views/ForgetPassword';
@@ -23,7 +24,7 @@ class App extends React.Component {
   render() {
     return (
       <Router
-        navigationBarStyle={{ backgroundColor: '#555555', paddingTop: 20 }} 
+        navigationBarStyle={{ backgroundColor: '#555555' }} 
         tintColor='white'
         titleStyle={{ color: '#fff' }}>
         <Scene key="root">
@@ -38,6 +39,11 @@ class App extends React.Component {
             component={Home}
             type={ActionConst.RESET}
             title="Muzikol"
+            onRight={() => Actions.settings()}
+            rightButtonImage={require('./src/assets/settings.png')}
+            onLeft = {() => Actions.home()}
+            leftButtonImage={require('./src/assets/user.png')}
+            leftButtonIconStyle={{ alignItems: 'flex-start', height: 30, width: 30}}
           />
 
           <Scene
@@ -56,6 +62,13 @@ class App extends React.Component {
             key="forgot_password"
             component={ForgetPassword}
             title="Forgot Password"
+            onRight={() => Actions.login()}
+          />
+
+        <Scene
+            key="settings"
+            component={Settings}
+            title="Settings"
             onRight={() => Actions.login()}
           />
         </Scene>

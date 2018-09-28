@@ -11,6 +11,9 @@ import {
 
 import { Actions } from 'react-native-router-flux';
 import Spinner from 'react-native-loading-spinner-overlay';
+import InputRound  from './../../components/commons/InputRound';
+import ButtonRound  from './../../components/commons/ButtonRound';
+
 
  class SignupArtist extends Component {
 
@@ -48,7 +51,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 				
 				<View style={styles.loginContainer}>
 
-						<TextInput style={styles.input}
+						<InputRound 
 	                        underlineColorAndroid = 'rgba(0,0,0,0)'
 	                      placeholder = "First Name"
 					        returnKeyType='next'
@@ -58,7 +61,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 	                        onChangeText={(firstName) => this.setState({ firstName, error: false })}
 	                    />
 
-	                    <TextInput style={styles.input}
+	                    <InputRound
 	                        underlineColorAndroid = 'rgba(0,0,0,0)'
 	                      placeholder = "Last Name"
 					        returnKeyType='next'
@@ -68,7 +71,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 	                        onChangeText={(lastName) => this.setState({ lastName, error: false })}
 	                    />
 
-	                    <TextInput style={styles.input}
+	                    <InputRound
 	                        underlineColorAndroid = 'rgba(0,0,0,0)'
 	                      placeholder = "Email"
 					        returnKeyType='next'
@@ -78,7 +81,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 	                        onChangeText={(email) => this.setState({ email, error: false })}
 	                    />
 
-	                    <TextInput style={styles.input}
+	                    <InputRound
 	                        underlineColorAndroid = 'rgba(0,0,0,0)'
 	                        placeholder = "Password"
 	                        secureTextEntry
@@ -89,7 +92,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 	                        onChangeText={(password) => this.setState({ password, error: false })}
 	                    />
 
-	                    <TextInput style={styles.input}
+	                    <InputRound
 	                        underlineColorAndroid = 'rgba(0,0,0,0)'
 	                        placeholder = "Confirm Password"
 					        keyboardType = "email-address"
@@ -99,12 +102,9 @@ import Spinner from 'react-native-loading-spinner-overlay';
 	          				returnKeyType='go'
 	                        onChangeText={(confirmPassword) => this.setState({ confirmPassword, error: false })}
 	                    />
-
-	                    <TouchableOpacity onPress={() => this.signupSubmit()}>
-	                        <View style={styles.button}>
-	                            <Text style={styles.text}>Create Account</Text>
-	                        </View>
-	                    </TouchableOpacity>
+	                    <ButtonRound text="Create Account"
+                        	onPress={() => this.signupSubmit()}>
+                  		</ButtonRound>
 
 	                    <Spinner visible={this.state.procesing} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
 				</View>
@@ -124,29 +124,7 @@ const styles = StyleSheet.create({
         marginLeft: 25,
         marginRight: 25
     },
-    input:{
-	    width:300,
-	    borderRadius: 25,
-	    fontSize: 16,
-	    height:40,
-	    alignSelf: 'center',
-	    backgroundColor: 'rgba(255,255,255,0.3)',
-	    color: '#FFF',
-	    paddingHorizontal: 16,
-	    marginVertical: 10,
-	},
-	button: {
-        width:300,
-        backgroundColor: '#1c313a',
-        borderRadius: 25,
-        paddingVertical: 12,
-        marginVertical: 10,
-    },
-    text: {
-        color: '#FFF',
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
+   
 });
 
 export default SignupArtist;

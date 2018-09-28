@@ -13,6 +13,9 @@ import {
 
 import { Actions } from 'react-native-router-flux';
 import Spinner from 'react-native-loading-spinner-overlay';
+import InputRound  from './../../components/commons/InputRound';
+import ButtonRound  from './../../components/commons/ButtonRound';
+
 
 class Login extends Component {
 
@@ -44,11 +47,11 @@ render() {
                 <View style={styles.loginContainer}>
                     <View style={styles.imageContainer}>
                         <Image
-                            style={styles.imageStyle}
+                            style={styles.logoStyle}
                             source={require('../../assets/main_logo.png')}
                         />
                     </View>
-                    <TextInput style={styles.input}
+                    <InputRound 
                         underlineColorAndroid = 'rgba(0,0,0,0)'
                       placeholder = "Username"
 				        returnKeyType='next'
@@ -58,7 +61,7 @@ render() {
 				        value={this.state.username}
                         onChangeText={(email) => this.setState({ email, error: false })}
                     />
-                    <TextInput style = {styles.input}
+                    <InputRound
                         underlineColorAndroid = 'rgba(0,0,0,0)'
 			            placeholder="password" 
 						secureTextEntry
@@ -74,11 +77,10 @@ render() {
                         : <Text></Text>
                     }
 
-                    <TouchableOpacity onPress={() => this.login()}>
-                        <View style={styles.button}>
-                            <Text style={styles.text}>Login</Text>
-                        </View>
-                    </TouchableOpacity>
+                    <ButtonRound text="Login"
+                        onPress={() => this.login()}>
+                    </ButtonRound>
+
                     
                     <TouchableOpacity onPress={() => Actions.forgot_password()}>
                         <Text style={styles.textStyle}>Forgot Password</Text>
@@ -86,7 +88,7 @@ render() {
                 </View>
                 <View style={styles.footerContainer}>
                     <TouchableOpacity onPress={() => Actions.signup()}>
-                        <Text style={styles.textStyle}>Don't have an account? Sign Up</Text>
+                        <Text style={styles.textStyle}>No account? Sign Up</Text>
                     </TouchableOpacity>
                 </View>
                 <Spinner visible={this.state.procesing} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
@@ -111,21 +113,10 @@ const styles = StyleSheet.create({
         marginLeft: 25,
         marginRight: 25
     },
-    input:{
-        width:300,
-        borderRadius: 25,
-        fontSize: 16,
-	    height:40,
-	    alignSelf: 'center',
-	    backgroundColor: 'rgba(255,255,255,0.3)',
-	    color: '#FFF',
-        paddingTop: 10,
-	    paddingHorizontal: 16,
-        marginVertical: 10,
-	},
+    
     footerContainer: {
         flex: 1,
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         alignItems: 'center'
     },
     errStyle: {
@@ -135,7 +126,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
 
-    imageStyle: {
+    logoStyle: {
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -145,18 +136,6 @@ const styles = StyleSheet.create({
         fontSize: 12,
         textAlign: 'center',
         marginBottom: 5
-    },
-    button: {
-        width:300,
-        backgroundColor: '#1c313a',
-        borderRadius: 25,
-        paddingVertical: 12,
-        marginVertical: 10,
-    },
-    text: {
-        color: '#FFF',
-        fontWeight: 'bold',
-         textAlign: 'center',
     },
 
 
