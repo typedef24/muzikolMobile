@@ -23,7 +23,9 @@ class InputRound extends Component {
         );
     }
 }
-
+//
+//defining of the styles to be used in the button component exclusively for this classs of the object
+// uncomment the section style inorder to get ride of the part that is responsible for the styles.
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -40,9 +42,9 @@ const styles = StyleSheet.create({
         borderColor: '#000',
         height: 40,
         borderRadius: 25 ,
-        margin: 10
+        margin: 10,
     }
 
 });
 
-export default InputRound;
+ export default InputRound;

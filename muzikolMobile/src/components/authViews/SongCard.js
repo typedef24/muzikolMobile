@@ -8,7 +8,6 @@ import {
 	BackHandler,
 	Image,
 	TextInput,
-	FlatList,
 	TouchableWithoutFeedback
 } from 'react-native';
 
@@ -16,14 +15,13 @@ import { Card } from './../../components/commons/Card';
 import InputRound  from './../../components/commons/InputRound';
 import { Header } from './../../components/commons/Header';
 import { Actions } from 'react-native-router-flux';
-import SongCard from './SongCard';
 
 import Splash from '../views/Splash';
 //logic here is to display splash if there is nothing on the state 
 //hence when the api call has fetched something then display that thing
 
 
-class HomeView extends Component {
+class SongCard extends Component {
 
 		state = {
 			content: true,
@@ -50,18 +48,43 @@ class HomeView extends Component {
 
 	render() {
         return (
-            <View style={styles.container}>
-               
-                <View style={styles.songContainer}>
-                  
-                 <FlatList
-					data = {this.props.songs}
-					 renderItem = {({item})=> <SongCard song = {item} />}
-				 />
+            <Card>
+                            <View style={styles.cardHeader}>
+                                <Image
+                                    style={styles.iconStyle2}
+                                    source={require('./../../assets/akon.png')}
+                                />
+                                <Text style = {styles.artistName}>brino man</Text>
+                                <Text style = {styles.lastUpdated}>5days ago</Text>
 
-                </View>
-
-            </View>
+                            </View>
+                            <TouchableWithoutFeedback >
+                                <View>
+                                    <Image
+                                        style={styles.imageStyle}
+                                        source={{uri: this.props.song.coverart}}
+                                    />
+                                    <View style={styles.songHeaderContainer}>
+                                        <Text numberOfLines={1} style={styles.songStyle}>{this.props.song.title}</Text>
+                                        <Text style={styles.songDescriptionStyle}>{this.props.song.description} {this.props.song.url}</Text>
+                                    </View>
+                                </View>
+                            </TouchableWithoutFeedback>
+                            <View style={styles.cardFooterSection}>
+                                <View style={styles.cardFooterLeft} >
+                                    <Image
+                                        style={styles.iconStyle2}
+                                        source={require('./../../assets/akon.png')}
+                                    />
+                                </View>
+                                <View style={ styles.cardFooterRight} >
+                                    <Image
+                                        style={styles.iconStyle2}
+                                        source={require('./../../assets/chat.png')}
+                                    />
+                                </View>
+                             </View>
+                        </Card>
         )
     }
 }
@@ -181,7 +204,7 @@ const styles = StyleSheet.create({
     },
     imageStyle: {
         height: 90,
-        width: null,
+        width: 90,
         borderTopRightRadius: 25,
         borderTopLeftRadius: 25,
 
@@ -191,4 +214,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default HomeView;
+export default SongCard;

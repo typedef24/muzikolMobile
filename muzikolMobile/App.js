@@ -8,12 +8,17 @@ BackHandler
 
 import OnboardingView from './src/components/OnboardingView';
 import Home from './src/components/authViews/Home';
+import Chat from './src/components/authViews/Chat';
+import Profile from './src/components/authViews/Profile';
+import Notification from './src/components/authViews/Notification';
+import Play from './src/components/authViews/Play';
 import Settings from './src/components/authViews/Settings';
 import Login from './src/components/views/Login';
 import SignupArtist from './src/components/views/SignupArtist';
 import ForgetPassword from './src/components/views/ForgetPassword';
 
-import { Router, Scene, ActionConst, Actions } from 'react-native-router-flux';
+import { Router, Scene, ActionConst, Tabs, Actions } from 'react-native-router-flux';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 class App extends React.Component {
   componentWillMount() {
@@ -34,18 +39,56 @@ class App extends React.Component {
             hideNavBar={true}
             
           />
-          <Scene
-            key="home"
-            component={Home}
-            type={ActionConst.RESET}
-            title="Muzikol"
-            onRight={() => Actions.settings()}
+          <Scene 
+            key="home"  
+            tabs={true} 
+            hideNavBar={true} 
+            tabBarStyle={styles.navigationTabBar} 
+            hideBackImage={true} onRight={() => Actions.settings()}
             rightButtonImage={require('./src/assets/settings.png')}
             onLeft = {() => Actions.home()}
             leftButtonImage={require('./src/assets/user.png')}
             leftButtonIconStyle={{ alignItems: 'flex-start', height: 30, width: 30}}
-          />
-
+          >
+                    <Scene
+                      key="home1"
+                      initial={true}
+                      component={Home}
+                      type={ActionConst.RESET}
+                      title="Muzikol"
+                      icon={TabIcon}
+                      iconName="home"
+                      />
+                     <Scene
+                        key="chat"
+                        component={Chat}
+                        title="Chat In"
+                        icon={TabIcon}
+                      iconName="comment"
+                      />                       
+                      <Scene
+                        key="play"
+                        component={Play}
+                        title="Menu"
+                        icon={TabIcon}
+                      iconName="play"
+                      />
+                      <Scene
+                        key="Notif"
+                        component={Notification}
+                        title="Notification In"
+                        icon={TabIcon}
+                      iconName="bell"
+                      />
+                       
+                       <Scene
+                        key="profile"
+                        component={Profile}
+                        title="Profile"
+                        icon={TabIcon}
+                        iconName="user"
+                      />                                            
+          </Scene>
           <Scene
             key="login"
             component={Login}
@@ -70,6 +113,12 @@ class App extends React.Component {
             component={Settings}
             title="Settings"
             onRight={() => Actions.login()}
+            hideNavBar={false}
+            hideBackImage={false} 
+            // rightButtonImage={require('./src/assets/settings.png')}
+            // onLeft = {() => Actions.home()}
+            // leftButtonImage={require('./src/assets/user.png')}
+            // leftButtonIconStyle={{ alignItems: 'flex-start', height: 30, width: 30}}
           />
         </Scene>
       </Router>
@@ -84,6 +133,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  navigationTabBar: {
+   backgroundColor: '#FFFFFF'
+
+  },
   bigblue: {
     color: 'blue',
     fontWeight: 'bold',
@@ -94,3 +147,12 @@ const styles = StyleSheet.create({
   },
 });
 export default  App;
+
+//Create a dedicated class that will manage the tabBar icon and the properties of the items in the tabbar
+class TabIcon extends React.Component {
+  render() {
+    return (
+      <FontAwesome name={this.props.iconName} size={30} color="blue"  />
+    );
+  }
+}

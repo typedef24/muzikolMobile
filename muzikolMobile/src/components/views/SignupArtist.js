@@ -18,8 +18,8 @@ import ButtonRound  from './../../components/commons/ButtonRound';
  class SignupArtist extends Component {
 
 	state = {
-		firstName : '',
-		lastName: '',
+		name : '',
+		username: '',
 		email : '',
 		password : '',
 		confirmPassword : '',
@@ -30,21 +30,51 @@ import ButtonRound  from './../../components/commons/ButtonRound';
 	};
 
 
-	signupSubmit(){
-		//todo
-		//process the api call for creating account and finish the necessary logic
 
-		//for now just display procesing and then give an alert to the user 
-		this.setState({ procesing: !this.state.procesing });
-		Alert.alert(
-              'Subfmit Progress',
-              'Your submit is in Progress?',
+	signupSubmit( ){
+        this.setState({ procesing: !this.state.procesing });
+        
+        const { username, password, name, email } = this.state;
+
+        fetch('http://localhost/sayo/api/web/v1/beforeauths/signupuser', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            "username": username,
+            "password": password,
+            "email": email,
+            "name": name,
+          }),
+        }).then((response) => response.json())
+            .then((responseJson) => {
+                //save the api key to async storage
+                this.setState({ procesing: false });
+                console.log(responseJson)
+                Actions.home();
+            })
+            .catch((error) => {
+                this.setState({ procesing: false });
+                // Handle error here...
+                this.setState({
+                    email: '',
+                    password: '',
+                    error: true
+                })
+              		Alert.alert(
+              'Account creation error',
+              'your account creation encountered the following error?'+error.message,
               // [
               //   {text: 'OK', onPress: () => BackHandler.exitApp()},
               //   {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
               // ]
             );
-	}
+            });
+
+    }
+
 	render() {
 		return (
 			<View style={styles.container}>
@@ -53,22 +83,22 @@ import ButtonRound  from './../../components/commons/ButtonRound';
 
 						<InputRound 
 	                        underlineColorAndroid = 'rgba(0,0,0,0)'
-	                      placeholder = "First Name"
+	                      placeholder = "Name"
 					        returnKeyType='next'
 					        keyboardType = "email-address"
 					        placeholderTextColor = 'rgba(255,255,255,0.2)'
-					        value={this.state.firstName}
-	                        onChangeText={(firstName) => this.setState({ firstName, error: false })}
+					        value={this.state.name}
+	                        onChangeText={(name) => this.setState({ name, error: false })}
 	                    />
 
 	                    <InputRound
 	                        underlineColorAndroid = 'rgba(0,0,0,0)'
-	                      placeholder = "Last Name"
+	                      placeholder = "User Name"
 					        returnKeyType='next'
 					        keyboardType = "email-address"
 					        placeholderTextColor = 'rgba(255,255,255,0.2)'
-					        value={this.state.lastName}
-	                        onChangeText={(lastName) => this.setState({ lastName, error: false })}
+					        value={this.state.username}
+	                        onChangeText={(username) => this.setState({ username, error: false })}
 	                    />
 
 	                    <InputRound

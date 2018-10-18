@@ -15,7 +15,7 @@ class Splash extends Component {
 			<View style = {styles.container}>
 				
                 <Image
-                    style={styles.backButtonStyle}
+                    style={styles.aplashImageStyle}
                     source={require('../../assets/onboarding.png')}
                 />
             
@@ -27,18 +27,20 @@ class Splash extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#555555',
+		 backgroundColor: '#555555',
+    borderWidth: 0,
+
+ 
 
 	},
-	header: {
-		fontSize: 40,
-	},
-
-	 iconStyleContainer: {
-        flex: 1
-    },
-    backButtonStyle: {
+    aplashImageStyle: {
     	flex: 1,
+    	 borderRadius: 15,
+    	     borderWidth: 0,
+
+    	     marginRight: 5
+
+
     },
 
 })

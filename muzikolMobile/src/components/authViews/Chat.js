@@ -7,12 +7,11 @@ import {
 } from 'react-native';
 
 
-class Settings extends Component {
+class Chat extends Component {
 	render(){
 		return (
             <View style={styles.container}>
-                <Text>Settings</Text>
-                <Text>There is nothing here for you to customize come back when this app is finished</Text>
+                <Text>Chat Screen</Text>
             </View>
         );
 	}
@@ -28,4 +27,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Settings;
+export default Chat;

@@ -36,9 +36,7 @@ class OnboardingView extends Component {
 
 
     render() {
-        if(this.state.firstTimeInstall === null){
-            return null; //this means asyncStorage is not working. Danger
-        } else if(this.state.firstTimeInstall == true){
+     if(this.state.firstTimeInstall == true){
             return (
                 <Onboarding
                     pages={[

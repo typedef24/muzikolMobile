@@ -13,6 +13,7 @@ class ForgetPassword extends Component {
 		return (
 			<View> 
 				<Text> ForgetPassword </Text>
+				<Text> I don't yet know how to help you </Text>
 			</View>
 		);
 	}
