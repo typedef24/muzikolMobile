@@ -15,6 +15,7 @@ import { Actions } from 'react-native-router-flux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import InputRound  from './../../components/commons/InputRound';
 import ButtonRound  from './../../components/commons/ButtonRound';
+import HttpRequest  from './../../api/HttpRequest';
 import helper  from './../../api/helper';
 
 
@@ -29,10 +30,15 @@ class Login extends Component {
     };
 
     componentWillMount() {
+                if(helper.isloggedin()){
+            this.setState({ loggedIn: true });
+            Actions.home();
+        }
         BackHandler.addEventListener('hardwareBackPress', () => Actions.pop());
     }
     componentDiMount(){
-        helper.get('http://localhost/sayo/api/web/v1/beforeauths/trendingmusic').then(data=>{
+
+        HttpRequest.get('http://localhost/sayo/api/web/v1/beforeauths/trendingmusic').then(data=>{
             console.log("result"+JSON.stringify(data))
         }).catch(err => {
             console.log("error"+ err.message)
@@ -52,13 +58,33 @@ class Login extends Component {
             "username": username,
             "password": password,
           };
-        helper.post('http://localhost/sayo/api/web/v1/beforeauths/login', body)
+        HttpRequest.post('http://localhost/sayo/api/web/v1/beforeauths/login', body)
             .then((response) => response.json())
             .then((responseJson) => {
                 //save the api key to async storage
+                AsyncStorage.getItem("MUZIKOL_USER_DATA").then(value => {
+                if(JSON.parse(value) == null) {
+                    var data = {
+                        name: responseJson.name,
+                        email: responseJson.email,
+                        password: body.password, 
+                        username: responseJson.username,
+                        loggedIn: true,
+                        apiKey: responseJson.activation_key
+                    }
+                    AsyncStorage.setItem("MUZIKOL_USER_DATA", JSON.stringify(data))
+  
+
                 this.setState({ procesing: false });
                 console.log(responseJson)
                 Actions.home();
+                }
+                else {
+
+                this.setState({ procesing: false });
+                 Actions.home(); 
+                }
+            })
             })
             .catch((error) => {
                 this.setState({ procesing: false });
@@ -73,10 +99,11 @@ class Login extends Component {
 
     }
 
-    //Todo Create forget_password Screen
-    //create signup Screen
+    //Todo Create forget_password view
+    //create signup view
 render() {
         return (
+            
             <View style={styles.container}>
                 
                 <View style={styles.loginContainer}>
@@ -89,20 +116,20 @@ render() {
                     <InputRound 
                         underlineColorAndroid = 'rgba(0,0,0,0)'
                       placeholder = "Username"
-				        returnKeyType='next'
-				        onSubmitEditing = { ()=> this.passwordInput.focus()}
-				        keyboardType = "email-address"
-				        placeholderTextColor = 'rgba(255,255,255,0.2)'
-				        value={this.state.username}
+                        returnKeyType='next'
+                        onSubmitEditing = { ()=> this.passwordInput.focus()}
+                        keyboardType = "email-address"
+                        placeholderTextColor = 'rgba(255,255,255,0.2)'
+                        value={this.state.username}
                         onChangeText={(username) => this.setState({ username, error: false })}
                     />
                     <InputRound
                         underlineColorAndroid = 'rgba(0,0,0,0)'
-			            placeholder="password" 
-						secureTextEntry
-          				returnKeyType='go'
-         				ref={(input)=> this.passwordInput = input}
-         				placeholderTextColor = 'rgba(255,255,255,0.2)'
+                        placeholder="password" 
+                        secureTextEntry
+                        returnKeyType='go'
+                        ref={(input)=> this.passwordInput = input}
+                        placeholderTextColor = 'rgba(255,255,255,0.2)'
                         value={this.state.password}
                         onChangeText={(password) => this.setState({ password })}
                     />

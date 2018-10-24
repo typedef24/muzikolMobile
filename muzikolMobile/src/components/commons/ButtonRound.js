@@ -16,7 +16,6 @@ class ButtonRound extends Component {
     }
 }
 
-// styles
 const styles = StyleSheet.create({
     button: {
 backgroundColor: '#1c313a',

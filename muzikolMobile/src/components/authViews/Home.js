@@ -9,7 +9,7 @@ import {
 
 import HomeView from './HomeView';
 import Splash from '../views/Splash';
-import helper  from './../../api/helper';
+import HttpRequest  from './../../api/HttpRequest';
 
 //logic here is to display splash if there is nothing on the state 
 //hence when the api call has fetched a then display that thing. 
@@ -26,7 +26,7 @@ class Home extends Component {
 		//still need to know the sequence of activities(flow) from client.
 		//taking client directly to login after install is wierd.
 	componentDidMount(){
-		helper.get('http://localhost/sayo/api/web/v1/beforeauths/trendingmusic')           .then((response) => response.json())
+		HttpRequest.get('http://localhost/sayo/api/web/v1/beforeauths/trendingmusic')           .then((response) => response.json())
             .then((responseJson) => {
                 //save the api key to async storage
                 this.setState({ procesing: false });

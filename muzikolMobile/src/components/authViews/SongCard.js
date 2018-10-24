@@ -16,34 +16,9 @@ import InputRound  from './../../components/commons/InputRound';
 import { Header } from './../../components/commons/Header';
 import { Actions } from 'react-native-router-flux';
 
-import Splash from '../views/Splash';
-//logic here is to display splash if there is nothing on the state 
-//hence when the api call has fetched something then display that thing
 
 
 class SongCard extends Component {
-
-		state = {
-			content: true,
-        	loggedIn: false,
-		}
-		//Todo
-		//only show splash screen when making a request to the api
-		//still need to know the sequence of activities(flow) from client.
-		//taking client directly to login after install is wierd.
-
-	componentWillMount() {
-        BackHandler.addEventListener('hardwareBackPress', () => {
-            Alert.alert(
-              'Exit App',
-              'You are about to exit the application, are you sure?',
-              [
-                {text: 'OK', onPress: () => BackHandler.exitApp()},
-                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-              ]
-            );
-          });
-    }
 
 
 	render() {
@@ -139,11 +114,7 @@ const styles = StyleSheet.create({
     	borderBottomRightRadius: 25, 
     	height: 30
 	},
-    songContainer: {
-        flex: 1,
-        alignItems: 'center',
-        paddingTop: 10
-    },
+
     songHeaderContainer: {
         justifyContent: 'center',
         alignItems: 'center'
@@ -162,14 +133,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         textAlign: 'center'
     },
-    iconStyle: {
-        padding: 10,
-        margin: 10,
-        height: 24,
-        width: 24,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
+
 
     iconStyle2: {
         margin: 0,
@@ -182,21 +146,7 @@ const styles = StyleSheet.create({
 
         borderRadius: 15
     },
-    sectionStyle: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#D1D1D1',
-        height: 40,
-        borderRadius: 5 ,
-        marginLeft: 10,
-        marginRight: 10,
-        paddingTop: 5,
-        marginTop: 15,
-        marginBottom: 15
-    },
+
     rowStyle: {
         flexDirection: 'row',
         alignItems: 'center',

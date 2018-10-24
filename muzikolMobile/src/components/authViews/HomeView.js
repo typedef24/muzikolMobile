@@ -12,25 +12,16 @@ import {
 	TouchableWithoutFeedback
 } from 'react-native';
 
-import { Card } from './../../components/commons/Card';
 import InputRound  from './../../components/commons/InputRound';
 import { Header } from './../../components/commons/Header';
 import { Actions } from 'react-native-router-flux';
 import SongCard from './SongCard';
 
-import Splash from '../views/Splash';
-//logic here is to display splash if there is nothing on the state 
-//hence when the api call has fetched something then display that thing
 
 
 class HomeView extends Component {
 
-		state = {
-			content: true,
-        	loggedIn: false,
-		}
 		//Todo
-		//only show splash screen when making a request to the api
 		//still need to know the sequence of activities(flow) from client.
 		//taking client directly to login after install is wierd.
 
@@ -56,6 +47,8 @@ class HomeView extends Component {
                   
                  <FlatList
 					data = {this.props.songs}
+					 keyExtractor = {(item, index) => item.pid}
+
 					 renderItem = {({item})=> <SongCard song = {item} />}
 				 />
 
