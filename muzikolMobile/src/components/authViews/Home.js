@@ -19,7 +19,8 @@ class Home extends Component {
 
 		state = {
 			content: true,
-			contentdata: '',
+			trendingmusic: '',
+			error: false,
 		}
 		//Todo
 		//only show splash screen when making a request to the api
@@ -31,13 +32,16 @@ class Home extends Component {
                 //save the api key to async storage
                 this.setState({ procesing: false });
 
-                this.setState({ contentdata: responseJson });
+                this.setState({ trendingmusic: responseJson });
 
-                console.log(this.state.contentdata);
+                console.log(this.state.trendingmusic);
 
                // Actions.home();
             })
            .catch(err => {
+           	    this.setState({ procesing: false });
+           	    this.setState({ error: true });
+
             console.log("error"+ err.message)
         });
 
@@ -58,7 +62,7 @@ class Home extends Component {
 
 	render() {
 		return (
-		this.state.content ? <HomeView songs={this.state.contentdata}/>:<Splash/>
+		this.state.content ? <HomeView songs={this.state.trendingmusic}/>:<Splash/>
 			
 		);
 	}

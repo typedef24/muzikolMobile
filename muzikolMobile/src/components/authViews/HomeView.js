@@ -47,7 +47,7 @@ class HomeView extends Component {
                   
                  <FlatList
 					data = {this.props.songs}
-					 keyExtractor = {(item, index) => item.pid}
+					 keyExtractor = {(item, index) => item.idTrending}
 
 					 renderItem = {({item})=> <SongCard song = {item} />}
 				 />

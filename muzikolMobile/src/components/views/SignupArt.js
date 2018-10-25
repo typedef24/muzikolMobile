@@ -19,7 +19,7 @@ import HttpRequest  from './../../api/HttpRequest';
 
 
 
- class SignupArtist extends Component {
+ class SignupArt extends Component {
 
 	state = {
 		name : '',
@@ -27,7 +27,8 @@ import HttpRequest  from './../../api/HttpRequest';
 		email : '',
 		password : '',
 		confirmPassword : '',
-		gender : '',
+		phone_number: '',
+		artisttype: '',
 		videoLink : '',
 		procesing: false,
 		error: false,
@@ -39,16 +40,20 @@ import HttpRequest  from './../../api/HttpRequest';
 	signupSubmit( ){
         this.setState({ procesing: !this.state.procesing });
         
-        const { username, password, name, email } = this.state;
+        const { username, password, name, email, phone_number, videoLink, artisttype } = this.state;
 
         const body = JSON.stringify({
             "username": username,
             "password": password,
             "email": email,
             "name": name,
+            "artisttype": artisttype,
+            "phone_number": phone_number,
+            "videoLink": videoLink,
+
           });
 
-        HttpRequest.post('http://localhost/sayo/api/web/v1/beforeauths/signupuser', body)
+        HttpRequest.post('http://localhost/sayo/api/web/v1/beforeauths/signupartist', body)
 			.then((response) => response.json())
             .then((responseJson) => {
                 // todo save the api key and muzikol userdata  to async storage
@@ -127,19 +132,42 @@ import HttpRequest  from './../../api/HttpRequest';
 					        placeholderTextColor = 'rgba(255,255,255,0.2)'
 					        value={this.state.confirmPassword}
 					        secureTextEntry
-	          				returnKeyType='go'
+	          				returnKeyType='next'
 	                        onChangeText={(confirmPassword) => this.setState({ confirmPassword, error: false })}
+	                    />
+
+	                    <InputRound
+	                        underlineColorAndroid = 'rgba(0,0,0,0)'
+	                        placeholder = "Phone Number"
+					        keyboardType = "phone-pad"
+					        placeholderTextColor = 'rgba(255,255,255,0.2)'
+					        value={this.state.phone_number}
+	          				returnKeyType='next'
+	                        onChangeText={(phone_number) => this.setState({ phone_number, error: false })}
+	                    />
+
+	                    <InputRound
+	                        underlineColorAndroid = 'rgba(0,0,0,0)'
+	                        placeholder = "Artist Type"
+					        keyboardType = "email-address"
+					        placeholderTextColor = 'rgba(255,255,255,0.2)'
+					        value={this.state.artisttype}
+	          				returnKeyType='next'
+	                        onChangeText={(artisttype) => this.setState({ artisttype, error: false })}
+	                    />
+
+	                    <InputRound
+	                        underlineColorAndroid = 'rgba(0,0,0,0)'
+	                        placeholder = "Popular Work Link "
+					        keyboardType = "email-address"
+					        placeholderTextColor = 'rgba(255,255,255,0.2)'
+					        value={this.state.videoLink}
+	          				returnKeyType='done'
+	                        onChangeText={(videoLink) => this.setState({ videoLink, error: false })}
 	                    />
 	                    <ButtonRound text="Create Account"
                         	onPress={() => this.signupSubmit()}>
                   		</ButtonRound>
-
-
-                  		<View style={styles.footerContainer}>
-		                    <TouchableOpacity onPress={() => Actions.signupartist()}>
-		                        <Text style={styles.textStyle}>No account? Sign As Artist</Text>
-		                    </TouchableOpacity>
-                		</View>
 
 	                    <Spinner visible={this.state.procesing} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
 				</View>
@@ -161,19 +189,7 @@ const styles = StyleSheet.create({
     },
 
     
-	textStyle: {
-        color: '#fff', 
-        fontWeight: '400',
-        fontSize: 12,
-        textAlign: 'center',
-        marginBottom: 5
-    },
-    footerContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
    
 });
 
-export default SignupArtist;
+export default SignupArt;

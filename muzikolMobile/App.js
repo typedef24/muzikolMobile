@@ -15,6 +15,7 @@ import Play from './src/components/authViews/Play';
 import Settings from './src/components/authViews/Settings';
 import Login from './src/components/views/Login';
 import SignupArtist from './src/components/views/SignupArtist';
+import SignupArt from './src/components/views/SignupArt';
 import ForgetPassword from './src/components/views/ForgetPassword';
 
 import { Router, Scene, ActionConst, Tabs, Actions } from 'react-native-router-flux';
@@ -120,6 +121,15 @@ class App extends React.Component {
             // leftButtonImage={require('./src/assets/user.png')}
             // leftButtonIconStyle={{ alignItems: 'flex-start', height: 30, width: 30}}
           />
+
+
+           <Scene
+            key="signupartist"
+            component={SignupArt}
+            title="Signup Artist "
+            onRight={() => Actions.login()}
+          />
+
         </Scene>
       </Router>
     );

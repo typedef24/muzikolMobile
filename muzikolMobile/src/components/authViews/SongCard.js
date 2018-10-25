@@ -21,7 +21,9 @@ import { Actions } from 'react-native-router-flux';
 class SongCard extends Component {
 
 
-	render() {
+	render() { 
+        // const imgUrl = "http://localhost/sayo/api/web/trending/"+this.props.song.coverart;
+        // console.log(imgUrl)
         return (
             <Card>
                             <View style={styles.cardHeader}>
@@ -34,10 +36,10 @@ class SongCard extends Component {
 
                             </View>
                             <TouchableWithoutFeedback >
-                                <View>
+                                <View> 
                                     <Image
                                         style={styles.imageStyle}
-                                        source={{uri: this.props.song.coverart}}
+                                        source={{uri: "http://localhost/sayo/api/web/trending/"+ this.props.song.coverart}}
                                     />
                                     <View style={styles.songHeaderContainer}>
                                         <Text numberOfLines={1} style={styles.songStyle}>{this.props.song.title}</Text>
@@ -153,8 +155,8 @@ const styles = StyleSheet.create({
         marginBottom: 15
     },
     imageStyle: {
-        height: 90,
-        width: 90,
+        height: 110,
+        width: 250,
         borderTopRightRadius: 25,
         borderTopLeftRadius: 25,
 

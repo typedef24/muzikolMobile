@@ -30,10 +30,10 @@ class Login extends Component {
     };
 
     componentWillMount() {
-                if(helper.isloggedin()){
-            this.setState({ loggedIn: true });
-            Actions.home();
-        }
+                // if(helper.isloggedin()){
+                //     this.setState({ loggedIn: true });
+                //     Actions.home();
+                // }
         BackHandler.addEventListener('hardwareBackPress', () => Actions.pop());
     }
     componentDiMount(){
@@ -79,10 +79,20 @@ class Login extends Component {
                 console.log(responseJson)
                 Actions.home();
                 }
+                else if( responseJson.isSuccess == 100) {
+                    this.setState({ procesing: false });
+                    // Handle error here...
+                    this.setState({
+                        email: '',
+                        password: '',
+                        error: true
+                    })
+                }
                 else {
-
                 this.setState({ procesing: false });
-                 Actions.home(); 
+                Actions.home(); 
+                console.log(responseJson)
+                console.log("else part working")
                 }
             })
             })
